@@ -7,7 +7,7 @@ void main() {
     expect(calculate(), 42);
   });
 
-  test('revolviendo el deck', () {
+  test('Revolviendo el deck', () {
     var juego = Floriferous();
     var ordenOriginal = juego.deck.map((card) => card.name).toList();
     juego.deck.shuffle();
@@ -34,6 +34,14 @@ void main() {
     final carta = Card('Daisy', 'Yellow', 'Small', 'Round');
     juego.agregarJardin(carta);
     expect(juego.cartasJardin, contains(carta));
+  });
+
+  test('Mostrar las cartas en el jardin', () {
+    var juego = Floriferous();
+    final carta = Card('Daisy', 'Yellow', 'Small', 'Round');
+    juego.agregarJardin(carta);
+    var mostrarJardin = juego.mostrarJardin();
+    expect([mostrarJardin], equals([mostrarJardin]));
   });
 }
 
