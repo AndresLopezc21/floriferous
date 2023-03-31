@@ -1,4 +1,3 @@
-import 'dart:js_util';
 import 'dart:math';
 import 'package:floriferous/floriferous.dart';
 import 'package:test/test.dart';
@@ -24,11 +23,17 @@ void main() {
     expect(nuevaMano, equals(manoInicial + 1));
   });
 
-  test('Mostrar la mano del jugador', () {
+  test('Mostrar la mano del jugador que por default empieza con 3 cartas', () {
     var juego = Floriferous();
-    juego.deck.shuffle(Random());
     var mostrarManoJugador = juego.mostrarMano();
     expect([mostrarManoJugador], equals([mostrarManoJugador]));
+  });
+
+  test('Agrega carta al jardín', () {
+    final juego = Floriferous();
+    final carta = Card('Daisy', 'Yellow', 'Small', 'Round');
+    juego.agregarJardin(carta);
+    expect(juego.cartasJardin, contains(carta));
   });
 }
 
@@ -44,6 +49,8 @@ class Card {
 class Floriferous {
   late List<Card> manoDeJugador;
   late List<Card> deck;
+  late List<Card> cartasJardin = [];
+
   Floriferous() {
     deck = [
       Card('Daisy', 'Yellow', 'Small', 'Round'),
@@ -72,6 +79,17 @@ class Floriferous {
   void mostrarMano() {
     print('Tu mano:');
     for (var card in manoDeJugador) {
+      print('${card.name} (${card.color}, ${card.size}, ${card.shape})');
+    }
+  }
+
+  void agregarJardin(Card card) {
+    cartasJardin.add(card);
+  }
+
+  void mostrarJardin() {
+    print('Jardín:');
+    for (var card in cartasJardin) {
       print('${card.name} (${card.color}, ${card.size}, ${card.shape})');
     }
   }
